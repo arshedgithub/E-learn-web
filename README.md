@@ -14,23 +14,41 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# project architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+/my-nextjs-project
+│
+├── /app
+│   ├── /(auth)
+│   │   └── login
+│   │       └── page.tsx      # /login page under auth group
+│   ├── /admin
+│   │   └── courses
+│   │       └── page.tsx      # /admin/courses page
+│   ├── /(root)
+│   │   └── home
+│   │       └── page.tsx      # /home page under root group
+│   ├── /api                  # API routes (backend endpoints)
+│   │   ├── /videos
+│   │   │   └── upload.ts
+│   │   └── /users
+│   │       └── login.ts
+│   ├── /components           # Shared UI components (React)
+│   ├── /hooks                # React hooks
+│   ├── /lib                  # Frontend helper libraries, fetch wrappers
+│   ├── /styles               # Global and modular styles
+│   └── /utils                # Frontend utilities
+│
+├── /backend                   # All backend code, logic, models, services (not pages/api)
+│   ├── /config               # DB connection config, Backblaze config, env setups
+│   ├── /db                   # MongoDB connection & models (Mongoose schemas)
+│   ├── /services             # Business logic, Backblaze integration, video services
+│   ├── /middlewares          # Backend middlewares (auth, validation)
+│   └── /utils                # Backend utils/helpers
+│
+├── /public                   # Static assets
+├── /scripts                  # Maintenance scripts, seeders, migrations, etc.
+├── .env.local                # Env variables for local dev
+├── next.config.js
+├── package.json
+└── README.md
