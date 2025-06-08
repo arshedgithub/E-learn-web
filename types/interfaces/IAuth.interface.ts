@@ -6,7 +6,7 @@ export interface IAuth {
     username: string;
     email: string;
     password: string;
-    status: USER_ROLE;
+    role: USER_ROLE;
     refreshToken: string;
     forgetPasswordCode: string;
     forgetPasswordCodeExpiry: Date;

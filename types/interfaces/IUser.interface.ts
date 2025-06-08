@@ -5,7 +5,13 @@ export interface IUser {
     _id: mongoose.Types.ObjectId;
     username: string;
     email: string;
-    role: USER_STATUS;
+    firstName: string;
+    lastName: string;
+    status: USER_STATUS;
+    profilePicture?: string;
+    bio?: string;
+    isVerified: boolean;
+    lastLogin?: Date;
     createdAt: Date;
     updatedAt: Date;
 }
