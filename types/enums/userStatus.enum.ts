@@ -1,7 +1,5 @@
 export enum USER_STATUS {
-    PENDING,
-    APPROVED,
-    ACTIVE,
-    INACTIVE,
-    BLOCKED
+    ACTIVE = "active",
+    INACTIVE = "inactive",
+    BLOCKED = "blocked"
 }
