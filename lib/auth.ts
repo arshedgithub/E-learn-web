@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import { USER_ROLE } from '@/types';
 import { NextResponse } from 'next/server';
+import { JWT_SECRET } from '@/config';
 
 export class AuthError extends Error {
     constructor(message: string, public code: string) {
@@ -19,7 +20,6 @@ export interface TokenPayload {
 }
 
 export function generateToken(payload: Omit<TokenPayload, 'iat' | 'exp'>): string {
-    const JWT_SECRET = process.env.JWT_SECRET;
     if (!JWT_SECRET) {
         throw new AuthError('JWT secret not configured', 'CONFIG_ERROR');
     }
@@ -28,7 +28,6 @@ export function generateToken(payload: Omit<TokenPayload, 'iat' | 'exp'>): strin
 }
 
 export function verifyToken(token: string): TokenPayload {
-    const JWT_SECRET = process.env.JWT_SECRET;
     if (!JWT_SECRET) {
         throw new AuthError('JWT secret not configured', 'CONFIG_ERROR');
     }
@@ -83,4 +82,39 @@ export function setAuthCookie(response: NextResponse, token: string): NextRespon
 export function clearAuthCookie(response: NextResponse): NextResponse {
     response.cookies.delete('token');
     return response;
+}
+
+// Middleware function for protecting routes
+export async function withAuth(handler: Function) {
+    return async (request: Request) => {
+        try {
+            const token = request.headers.get('authorization')?.split(' ')[1];
+            if (!token) {
+                return NextResponse.json(
+                    { error: 'No token provided' },
+                    { status: 401 }
+                );
+            }
+
+            const payload = verifyToken(token);
+            // Add user to request headers for the handler to use
+            const requestWithUser = new Request(request.url, {
+                ...request,
+                headers: new Headers({
+                    ...Object.fromEntries(request.headers),
+                    'x-user-id': payload.userId,
+                    'x-user-email': payload.email,
+                    'x-user-role': payload.role
+                })
+            });
+
+            return handler(requestWithUser);
+        } catch (error) {
+            console.error('Auth middleware error:', error);
+            return NextResponse.json(
+                { error: 'Invalid token' },
+                { status: 401 }
+            );
+        }
+    };
 }

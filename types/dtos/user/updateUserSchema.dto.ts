@@ -7,14 +7,13 @@ export const updateUserDtoSchema = {
         bio: { type: 'string', maxLength: 500 },
         avatar: { type: 'string', format: 'uri' }
     },
-    required: ['username', 'firstName', 'lastName'],
     additionalProperties: false
 };
 
 export interface UpdateUserDto {
-    username: string;
-    firstName: string;
-    lastName: string;
+    username?: string;
+    firstName?: string;
+    lastName?: string;
     bio?: string;
     avatar?: string;
 } 

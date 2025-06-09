@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken } from '@/lib/auth';
+import { verifyToken } from '@/lib';
 import { USER_ROLE } from '@/types';
 
-// Paths that require authentication
 const AUTH_PATHS = [
     '/dashboard',
     '/profile',
@@ -12,13 +11,11 @@ const AUTH_PATHS = [
     '/api/enrollments'
 ];
 
-// Paths that require admin role
 const ADMIN_PATHS = [
     '/admin',
     '/api/admin'
 ];
 
-// Public paths that don't require authentication
 const PUBLIC_PATHS = [
     '/',
     '/login',
@@ -31,19 +28,16 @@ const PUBLIC_PATHS = [
 export function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
-    // Allow public paths
     if (PUBLIC_PATHS.some(path => pathname.startsWith(path))) {
         return NextResponse.next();
     }
 
-    // Check for token
     const token = req.cookies.get('token')?.value;
     if (!token) {
         return redirectToLogin(req);
     }
 
     try {
-        // Verify token
         const payload = verifyToken(token);
         if (!payload) {
             return redirectToLogin(req);
