@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const defaultBcryptConfig = {
   SALT_ROUNDS: 12,
 };

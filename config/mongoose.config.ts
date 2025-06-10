@@ -1,7 +1,5 @@
 import Ajv from 'ajv';
 
-require('dotenv').config();
-
 const mongooseURL = process.env.MONGOOSE_URL;
 
 const ajv = new Ajv({ allErrors: true });
