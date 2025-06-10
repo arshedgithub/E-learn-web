@@ -50,5 +50,4 @@ AuthSchema.pre('save', function (next) {
   });
 });
 
-AuthSchema.index({ email: 1 }, { unique: true });
 export const Auth = mongoose.model<IAuth>('Auth', AuthSchema);
