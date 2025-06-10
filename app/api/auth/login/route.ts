@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
 import { AuthService } from '@/services';
 import { loginDtoSchema, LoginDto } from '@/types';
-import { setAuthCookie, validate, errorResponse, successResponse } from '@/lib';
+import { setAuthCookie, validate, errorResponse, successResponse, withDB } from '@/lib';
 
 const authService = new AuthService();
 
-export async function POST(req: NextRequest) {
+export const POST = withDB(async (req: NextRequest) => {
     try {
         const body = await req.json();
         const { email, password } = validate<LoginDto>(loginDtoSchema, body);
@@ -20,4 +20,4 @@ export async function POST(req: NextRequest) {
             401
         );
     }
-} 
+}); 
