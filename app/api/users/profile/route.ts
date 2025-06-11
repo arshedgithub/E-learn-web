@@ -1,7 +1,9 @@
 import { NextRequest } from 'next/server';
 import { UserService } from '@/services';
-import { getAuthUser, errorResponse, successResponse, validate } from '@/lib';
-import { updateUserDtoSchema, UpdateUserDto } from '@/types/dtos/user';
+import { getAuthUser, errorResponse, successResponse, validate } from '@/lib' ;
+import { updateUserDtoSchema, UpdateUserDto } from '@/types'; 
+
+export const runtime = 'nodejs';
 
 const userService = new UserService();
 

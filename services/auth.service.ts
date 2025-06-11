@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import { User, Auth } from '@/models';
 import { USER_STATUS, USER_ROLE } from '@/types';
 import { generateToken } from '@/lib';
+import { NextRequest } from 'next/server';
 
 export class AuthService {
     async register(
@@ -151,5 +152,29 @@ export class AuthService {
         );
 
         return user;
+    }
+
+    async updatePassword(req: NextRequest, currentPassword: string, newPassword: string) {
+        // Get user ID from token
+        const token = req.headers.get('authorization')?.split(' ')[1];
+        if (!token) {
+            throw new Error('No token provided');
+        }
+
+        // Find auth record
+        const auth = await Auth.findOne({ _id: token });
+        if (!auth) {
+            throw new Error('User not found');
+        }
+
+        // Verify current password
+        const isValidPassword = await bcrypt.compare(currentPassword, auth.password);
+        if (!isValidPassword) {
+            throw new Error('Current password is incorrect');
+        }
+
+        // Update password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await Auth.findByIdAndUpdate(auth._id, { password: hashedPassword });
     }
 } 

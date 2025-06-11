@@ -1,12 +1,14 @@
 export const resetPasswordDtoSchema = {
     type: 'object',
     properties: {
-        email: { type: 'string', format: 'email' }
+        token: { type: 'string', minLength: 1 },
+        newPassword: { type: 'string', minLength: 6 }
     },
-    required: ['email'],
+    required: ['token', 'newPassword'],
     additionalProperties: false
 };
 
 export interface ResetPasswordDto {
-    email: string;
+    token: string;
+    newPassword: string;
 } 

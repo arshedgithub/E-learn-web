@@ -3,6 +3,8 @@ import { AuthService } from '@/services';
 import { loginDtoSchema, LoginDto } from '@/types';
 import { setAuthCookie, validate, errorResponse, successResponse, withDB } from '@/lib';
 
+export const runtime = 'nodejs';
+
 const authService = new AuthService();
 
 export const POST = withDB(async (req: NextRequest) => {

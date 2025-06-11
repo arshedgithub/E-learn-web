@@ -3,6 +3,8 @@ import { USER_ROLE } from '@/types';
 import { UserService } from '@/services';
 import { getAuthUser, errorResponse, successResponse } from '@/lib';
 
+export const runtime = 'nodejs';
+
 const userService = new UserService();
 
 export async function GET(req: NextRequest) {

@@ -1,14 +1,14 @@
 export const updatePasswordDtoSchema = {
     type: 'object',
     properties: {
-        token: { type: 'string', minLength: 1 },
-        password: { type: 'string', minLength: 6 }
+        currentPassword: { type: 'string', minLength: 6 },
+        newPassword: { type: 'string', minLength: 6 }
     },
-    required: ['token', 'password'],
+    required: ['currentPassword', 'newPassword'],
     additionalProperties: false
 };
 
 export interface UpdatePasswordDto {
-    token: string;
-    password: string;
+    currentPassword: string;
+    newPassword: string;
 } 
