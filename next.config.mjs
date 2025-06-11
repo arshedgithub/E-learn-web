@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  experimental: {
+    serverActions: true,
+  },
+  // Specify Node.js runtime for API routes
+  runtime: 'nodejs',
 };
 
 export default nextConfig; 
