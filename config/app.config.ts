@@ -1,8 +1,6 @@
 import Ajv from 'ajv';
 import { BcryptConfig } from './bcrypt.config';
 
-export const runtime = 'nodejs';
-
 const ajv = new Ajv({ allErrors: true });
 
 require('ajv-formats')(ajv);
