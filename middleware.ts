@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '@/lib';
 import { USER_ROLE } from '@/types';
 
+export const runtime = 'nodejs';
+
 const AUTH_PATHS = [
     '/dashboard',
     '/profile',
