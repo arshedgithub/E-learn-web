@@ -4,6 +4,8 @@ import { USER_STATUS, USER_ROLE } from '@/types';
 import { generateToken } from '@/lib';
 import { NextRequest } from 'next/server';
 
+export const runtime = 'nodejs';
+
 export class AuthService {
     async register(
         email: string,

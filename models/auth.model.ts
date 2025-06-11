@@ -1,7 +1,10 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { IAuth, USER_ROLE } from '@/types';
 import { AppConfig } from '@/config';
+import { getModel } from '@/lib/mongoose';
+
+export const runtime = 'nodejs';
 
 const saltRounds: number = AppConfig.SALT;
 
@@ -50,4 +53,4 @@ AuthSchema.pre('save', function (next) {
   });
 });
 
-export const Auth = mongoose.model<IAuth>('Auth', AuthSchema);
+export const Auth = getModel<IAuth>('Auth', AuthSchema);

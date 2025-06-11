@@ -1,6 +1,8 @@
 import { User, Auth } from '@/models';
 import { IUser, USER_STATUS, USER_ROLE } from '@/types';
 
+export const runtime = 'nodejs';
+
 export class UserService {
     async getUserProfile(userId: string): Promise<IUser> {
         const user = await User.findById(userId);

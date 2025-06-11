@@ -1,8 +1,10 @@
+import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import { USER_ROLE } from '@/types';
-import { NextResponse } from 'next/server';
 import { JWT_SECRET } from '@/config';
+
+export const runtime = 'nodejs';
 
 export class AuthError extends Error {
     constructor(message: string, public code: string) {

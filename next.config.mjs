@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {},
-  output: 'standalone',
-  defaultRuntime: 'nodejs',
+  output: 'standalone'
 };
 
 export default nextConfig; 

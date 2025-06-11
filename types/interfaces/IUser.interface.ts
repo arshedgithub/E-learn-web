@@ -12,6 +12,7 @@ export interface IUser {
     bio?: string;
     isVerified: boolean;
     lastLogin?: Date;
+    avatar?: string;
     createdAt: Date;
     updatedAt: Date;
 }

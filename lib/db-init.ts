@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server';
 import { connectToDatabase } from './mongoose';
 
+export const runtime = 'nodejs';
+
 export function withDB(handler: (req: NextRequest) => Promise<Response>) {
     return async function(req: NextRequest) {
         try {

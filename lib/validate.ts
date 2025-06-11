@@ -2,6 +2,8 @@ import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import { IValidationSchema } from '@/types';
 
+export const runtime = 'nodejs';
+
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
 

@@ -1,7 +1,10 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
+import { getModel } from '@/lib/mongoose';
 import { IUser, USER_STATUS } from '@/types';
 
-const UserSchema = new Schema<IUser>(
+export const runtime = 'nodejs';
+
+const UserSchema = new mongoose.Schema<IUser>(
   {
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true },
@@ -20,10 +23,11 @@ const UserSchema = new Schema<IUser>(
     bio: { type: String },
     isVerified: { type: Boolean, default: false },
     lastLogin: { type: Date },
+    avatar: { type: String }
   },
   {
     timestamps: true,
   }
 );
 
-export const User = mongoose.model<IUser>('User', UserSchema); 
+export const User = getModel<IUser>('User', UserSchema); 

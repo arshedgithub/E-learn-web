@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { MONGOOSE_URL } from '@/config';
 
+export const runtime = 'nodejs';
+
 const MONGODB_URI = MONGOOSE_URL!;
 
 if (!MONGODB_URI) {
